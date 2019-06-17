@@ -63,7 +63,7 @@
           
           <?php
               $id_admin=$this->session->userdata('idadmin');
-              $q=$this->db->query("SELECT * FROM admin WHERE idadmin='$id_admin'");
+              $q=$this->db->query("SELECT * FROM user WHERE idadmin='$id_admin'");
               $c=$q->row_array();
           ?>
           <li class="dropdown user user-menu">

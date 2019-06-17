@@ -55,7 +55,7 @@
     
     <!-- /.social-auth-links -->
     <hr/>
-    <p><center>Copyright <?php echo date('Y');?> by M Fikri Setiadi <br/> All Right Reserved</center></p>
+    <p><center>Copyright <?php echo date('Y');?> by Rizqi A.W <br/> All Right Reserved</center></p>
   </div>
   <!-- /.login-box-body -->
 </div>

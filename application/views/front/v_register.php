@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="id">
+    <!--<![endif]-->
     <head>
-        <title>Berita</title>
+        <title>Kontak kami</title>
 
         <!-- Meta tags -->
         <meta charset="utf-8">
@@ -15,129 +15,118 @@
         <link rel="stylesheet" href="<?php echo base_url().'theme/css/skeleton.css'?>" />
         <link rel="stylesheet" href="<?php echo base_url().'theme/css/flexslider.css'?>" />
         <link rel="stylesheet" href="<?php echo base_url().'theme/css/jquery.fancybox-1.3.4.css'?>" />
+        <link rel="stylesheet" href="<?php echo base_url().'theme/css/validationEngine.jquery.css'?>" />
+        <link rel="stylesheet" href="<?php echo base_url().'theme/css/smoothness/jquery-ui-1.8.22.custom.css'?>" />
+        <link rel="stylesheet" href="<?php echo base_url().'theme/css/ui.spinner.css'?>" />
         <link rel="stylesheet" href="<?php echo base_url().'theme/css/lamoon.css'?>" />
         <link href='http://fonts.googleapis.com/css?family=Lato|Lato:300|Vollkorn:400italic' rel='stylesheet' type='text/css'>
-        
-       
         <!-- Favicons -->
         <link rel="shortcut icon" href="<?php echo base_url().'theme/images/favicon.png'?>" />
-    </head>
-     <?php 
+        <?php 
             function limit_words($string, $word_limit){
                 $words = explode(" ",$string);
                 return implode(" ",array_splice($words,0,$word_limit));
             }
                 
         ?>
+    </head>
     <body>
-        
+
         <!-- Background Image -->
         <img src="<?php echo base_url().'theme/images/bg1.jpg'?>" class="bg" alt="" />
-        
+
         <!-- Root Container -->
         <div id="root-container" class="container">
             <div id="wrapper" class="sixteen columns">
-                
+
                 <!-- Banner -->
                 <div id="sub-banner">
                     <div id="logo">
                     </div>
                     <img src="<?php echo base_url().'theme/images/placeholders/940x220.png'?>" alt="" />
                 </div>
-               
-                <!-- Main Menu -->                               
-                <div id="menu" class="page">
+
+                <!-- Main Menu -->
+                <div id="menu" class="home">
                     <ul id="root-menu" class="sf-menu">
                         <?php
-                        $this->load->view('front/menu');
+                            $this->load->view('front/menu');
                         ?>
                     </ul>
                 </div>
-                
+
                 <!-- Content -->
-                <div id="content">
-                    <div id="blog" class="container section">
-                        <div id="blog-content" class="two-third column">
-                        <?php
-                            foreach ($news->result_array() as $b) {
-                                $idberita=$b['idberita'];
-                                $judul=$b['judul'];
-                                $isi=limit_words($b['isi'],25);
-                                $tglpost=$b['tglpost'];
-                                $gbr=$b['gambar'];
-                                $user=$b['user'];
-                        ?>
-                            <div class="blog-item">
-                                <div class="hover">
-                                    <a href="<?php echo base_url().'berita_post/detail_berita/'.$idberita;?>">
-                                    <div class="readmore">
-                                        <span class="text"><span class="anchor"></span></span>
-                                    </div> <img width="560" height="150" src="<?php echo base_url().'assets/gambars/'.$gbr;?>" alt="" /> </a>
+                <div id="content" class="contact">
+                    <div id="intro">
+                    </div>
+                    
+                    <div class="container section">
+                        
+                        <div class="two-third column last">
+                            <h3 class="nobg">Register</h3>
+                            <?php echo $this->session->flashdata('msg');?>
+                            <form class="form-horizontal" method="post" action="<?php echo base_url().'register/simpan_pengguna'?>" enctype="multipart/form-data">
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-3" >Nama</label>
+                                        <div class="col-xs-8">
+                                            <input name="nama" class="form-control" type="text" placeholder="Nama" required>
+                                        </div>
+                                    </div>
+                                           
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-3" >Username</label>
+                                        <div class="col-xs-8">
+                                            <input name="username" class="form-control" type="text" placeholder="username" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-3" >Password</label>
+                                        <div class="col-xs-8">
+                                            <input name="password" class="form-control" type="password" placeholder="Password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-3" >Ulangi Password</label>
+                                        <div class="col-xs-8">
+                                            <input name="password2" class="form-control" type="password" placeholder="Ulangi Password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-xs-3" >Photo</label>
+                                        <div class="col-xs-8">
+                                            <input type="file" name="filefoto" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  for="Alamat" class="required label">Alamat</label>
+                                        <textarea name="alamat" cols="28" rows="5" style="width:300px;" placeholder="Alamat" required></textarea>
+                                    </div>
+
                                 </div>
-                                <h2 class="blog"><a href="<?php echo base_url().'berita_post/detail_berita/'.$idberita;?>"><?php echo $judul;?></a></h2>
-                                <p class="blog-item-meta">
-                                    <?php echo $tglpost;?>, by <?php echo $user;?>, <a href="#">9 Comments</a>
-                                </p>
+                                <br/>
                                 <p>
-                                    <?php echo $isi;?> ...
+                                    <input class="medium gray button" type="submit" name="Submit" value="Submit" />
                                 </p>
-                                <p>
-                                    <a href="<?php echo base_url().'berita_post/detail_berita/'.$idberita;?>" class="small gray button">Read more ...</a>
-                                </p>
-                            </div>
-                            <?php
-                            }
-                        ?>
-                           
-                            <div class="blog-paging">
-                                   <?php echo $page;?>
-                            </div>
-                        </div>
-                        <div id="sidebar-content" class="one-third column last">
-                            <div class="sidebar-item">
-                                <h3 class="nobg">Pencarian</h3>
-                                <form id="search-form" method="get">
-                                    <span>
-                                        <input id="searchbox" type="text" placeholder="cari..." />
-                                    </span>
-                                    <input id="search-button" class="medium gray button" type="submit" value="Go" />
-                                </form>
-                            </div>
-                           
-                            <div class="sidebar-item">
-                                <h3 class="nobg">Latest Events</h3>
-                                <ul id="latest-events" class="square">
-                                    <?php
-                                    foreach ($brt->result_array() as $b) {
-                                        $idberita=$b['idberita'];
-                                        $judul=$b['judul'];
-                                        $isi=$b['isi'];
-                                        $tglpost=$b['tglpost'];
-                                        $gbr=$b['gambar'];
-                                        $user=$b['user'];
-                                ?>
-                                    <li>
-                                        <a href="<?php echo base_url().'berita_post/detail_berita/'.$idberita;?>"><img width="50" height="50" src="<?php echo base_url().'assets/gambars/'.$gbr;?>" alt="" /><?php echo $judul;?></a>
-                                        <span><?php echo $tglpost;?></span>
-                                    </li>
-                                <?php
-                                    }
-                                ?>
-                                </ul>
-                            </div>
-                            <div class="sidebar-item">
-                            </div>
+                            </form>
+
+                            
+
                         </div>
                     </div>
                 </div>
-                
-               <!-- Footer -->
+
+                <!-- Footer -->
                 <div id="footer">
                     <div class="container section end">
                         <div id="footer-about" class="one-fourth column">
                             <p><img src="<?php echo base_url().'theme/images/footer-logo.png'?>" alt="" />
                             </p>
-                           <p>
+                            <p>
                                 <br><a href="#">Alamat Kantor:</a></br>
                                 <span>Jl. Tour & Travel Padang, Sumatra Barat</span>
                                 <span>Telp: 0751 XXXXXXX</span>
@@ -237,7 +226,7 @@
                 </div>
             </div>
         </div>
-            
+
         <!-- JavaScript Files -->
         <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery-1.7.2.min.js'?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery.easing.1.3.js'?>"></script>
@@ -246,6 +235,11 @@
         <script type="text/javascript" src="<?php echo base_url().'theme/scripts/superfish.js'?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery.cycle.lite.js'?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery.fancybox-1.3.4.pack.js'?>"></script>
-        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/lamoon.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery.validationEngine.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery.validationEngine-en.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/jquery-ui-1.8.22.custom.min.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/ui.spinner.min.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'theme/scripts/lamoon.js'?>"></script>  
+
     </body>
 </html>

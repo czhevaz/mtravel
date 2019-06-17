@@ -2,12 +2,12 @@
 <html lang="id">
 
     <head>
-        <title>Tour and Travel Agency</title>
+        <title>Traveling And Food</title>
 
         <!-- Meta tags -->
         <meta charset="utf-8">
         <meta name="description" content="Demo Website Company Profil Tour and Travel" />
-        <meta name="author" content="M Fikri Setiadi" />
+        <meta name="author" content="Rizqi A.W" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
         <!-- Stylesheets -->
@@ -75,7 +75,7 @@
                             M-Travel Adalah Source Code Open Source berbasis web untuk company profil Tour and Travel yang menyajikan Berbagai Informasi dan Paket Wisata Pilihan. Dimana para wistawan dapan membooking paket wisata yang diinginkan secara online.
                         </p>
                         <p>
-                            <a href="<?php echo base_url().'berita_post';?>" class="large gray button">Artikel/Berita</a><span>Atau</span><a href="<?php echo base_url().'paket_tour'?>" class="large gray button">Paket Tour</a>
+                            <a href="<?php echo base_url().'administrator';?>" class="large gray button">Sign in</a><span>Atau</span><a href="<?php echo base_url().'register'?>" class="large gray button">Register</a>
                         </p>
                     </div>
                    
@@ -260,7 +260,7 @@
                                 <a href="#"><img src="<?php echo base_url().'theme/images/social/dribbble.png'?>" alt="" /></a>
                             </li>
                         </ul>
-                        <span id="text">Copyright &copy; <?php date_default_timezone_set('Asia/Jakarta'); echo date('Y');?> | <a href="http://mfikri.com">M Fikri Setiadi</a>.</span>
+                        <span id="text">Copyright &copy; <?php date_default_timezone_set('Asia/Jakarta'); echo date('Y');?> | <a href="http://mfikri.com">Rizqi A.W</a>.</span>
 
                     </div>
                 </div>

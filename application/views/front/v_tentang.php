@@ -6,7 +6,7 @@
 <!-- Meta tags -->
         <meta charset="utf-8">
         <meta name="description" content="Demo Website Company Profil Tour and Travel" />
-        <meta name="author" content="M Fikri Setiadi" />
+        <meta name="author" content="Rizqi A.W" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
         <!-- Stylesheets -->
@@ -166,7 +166,7 @@
                                 <a href="#"><img src="<?php echo base_url().'theme/images/social/dribbble.png'?>" alt="" /></a>
                             </li>
                         </ul>
-                        <span id="text">Copyright &copy; <?php date_default_timezone_set('Asia/Jakarta'); echo date('Y');?> | <a href="http://mfikri.com">M Fikri Setiadi</a>.</span>
+                        <span id="text">Copyright &copy; <?php date_default_timezone_set('Asia/Jakarta'); echo date('Y');?> | <a href="http://mfikri.com">Rizqi A.W</a>.</span>
 
                     </div>
                 </div>

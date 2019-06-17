@@ -34,6 +34,13 @@ class Administrator extends CI_Controller{
              $this->session->set_userdata('idadmin',$idadmin);
              $this->session->set_userdata('nama',$user_nama);
          } //Front Office
+         if($xcadmin['level']=='3'){
+             $this->session->set_userdata('akses','3');
+             $idadmin=$xcadmin['idadmin'];
+             $user_nama=$xcadmin['nama'];
+             $this->session->set_userdata('idadmin',$idadmin);
+             $this->session->set_userdata('nama',$user_nama);
+         } //Front Office
            
          
          

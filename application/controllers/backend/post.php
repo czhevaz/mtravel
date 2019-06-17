@@ -11,12 +11,12 @@ class Post extends CI_Controller{
 	}
 
 	function index(){
-		if($this->session->userdata('akses')=='1'){
+		/*if($this->session->userdata('akses')=='1'){*/
 	    	$x['data']=$this->mberita->tampil_berita();
 	        $this->load->view('backend/v_post',$x);
-	    }else{
+	    /*}else{
 	        echo "Halaman tidak ditemukan";
-	    }	
+	    }	*/
 	}
 
 	function add_post(){

@@ -40,7 +40,7 @@
                             </ul>
                         </li>
                         <li>
-                        <!-- <li>
-                            <a href="<?php echo base_url().'kontak'?>">Hubungi Kami</a>
-                        </li> -->
+                         <li>
+                            <a href="<?php echo base_url().'register'?>">Register</a>
+                        </li> 
                     </ul>

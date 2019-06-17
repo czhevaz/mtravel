@@ -10,12 +10,12 @@ class Wisata extends CI_Controller{
         $this->load->library('upload');
     }
     function index(){
-	    if($this->session->userdata('akses')=='1'){
+	    /*if($this->session->userdata('akses')=='1'){*/
 	    	$x['data']=$this->mwisata->tampil_wisata();
 	        $this->load->view('backend/v_wisata',$x);
-	    }else{
+	    /*}else{
 	        echo "Halaman tidak ditemukan";
-	    }
+	    }*/
     }
 
     function simpan_wisata(){
