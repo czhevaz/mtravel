@@ -10,8 +10,8 @@ class Mpengguna extends CI_Model{
         return $query;
     }
 
-    function getusername($id){
-        $query=$this->db->query("select * from user where idadmin='$id'");
+    function getusername($username){
+        $query=$this->db->query("select * from user where username='$username'");
         return $query;
     }
 

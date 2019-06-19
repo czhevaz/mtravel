@@ -40,16 +40,18 @@ class Register extends CI_Controller{
                 $password2=$this->input->post('password2');
                 $level=3;
                 $alamat=$this->input->post('alamat');
-
+                $getUserName =$this->mpengguna->getByUsername($username);
+               // print_r($this->mpengguna->getByUsername($username));
+                //die();
                 if($password <> $password2){
-                    echo $this->session->set_flashdata('msg','Ulangi password tidak sama');
+                    echo $this->session->set_flashdata('error','Ulangi password tidak sama');
                     redirect('register');
-                }elseif($this->mpengguna->getByUsername($username)){
-                	echo $this->session->set_flashdata('msg','username '.$username.' sudah ada');
+                }elseif($getUserName->num_rows()>0){
+                	echo $this->session->set_flashdata('error','ulangi username '.$username.' sudah ada');
                     redirect('register');
             	}else{
                     $this->mpengguna->simpan_user($nama,$username,$password,$level,$gambar,$alamat);
-                    echo $this->session->set_flashdata('msg','success');
+                    echo $this->session->set_flashdata('success','success');
                     redirect('register'); 
                 }
                 

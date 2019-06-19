@@ -61,10 +61,17 @@
                     </div>
                     
                     <div class="container section">
-                        
+            
                         <div class="two-third column last">
                             <h3 class="nobg">Register</h3>
-                            <?php echo $this->session->flashdata('msg');?>
+                            <?php if($this->session->flashdata('success')){ ?>  
+
+                                <p><b>Success!</b> ' <?php echo $this->session->flashdata('success'); ?>' </p>
+                            <?php } else if($this->session->flashdata('error')){ ?>  
+                                <p>  <span style="color: red;"><b>Error!</b> '<?php echo $this->session->flashdata('error'); ?>'</span> </p>        
+                             <?php } ?>      
+
+                            
                             <form class="form-horizontal" method="post" action="<?php echo base_url().'register/simpan_pengguna'?>" enctype="multipart/form-data">
                                 <div class="modal-body">
 
