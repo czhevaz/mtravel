@@ -20,6 +20,7 @@
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap-gallery.css'?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
   <!-- DataTables -->
@@ -65,7 +66,67 @@
     </section>
 
     <!-- Main content -->
+   
     <section class="content">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 co-xs-12">
+        <div class="box">
+            <div class="box-header">
+              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Add New</a>
+            </div>
+        </div>    
+        </div>
+      </div>
+       <div class=" gal-container">
+
+      <?php
+          $no=0;
+              foreach($data->result_array() as $a):
+                  $no++;
+                  $id=$a['idalbum'];
+                  $judul=$a['jdl_album'];
+                  $cover=$a['cover'];
+          ?>  
+            
+              <div class="col-md-4 col-sm-6 co-xs-12">
+                <div class="box">
+                  <div class="box-body">
+                    <div >
+                  <a href="#" data-toggle="modal" data-target="#<?php echo $id; ?>" >
+                     <img class="img-thumbnail" width="90" height="80" src="<?php echo base_url().'assets/gambars/'.$cover; ?>">
+                  </a>
+                </div>
+                  </div>
+                  <div class="box-footer">
+                    <p><h7><?php echo $judul; ?></h7>
+                    <a class="btn pull-right" data-toggle="modal" data-target="#ModalUpdate<?php echo $id;?>"><span class="fa fa-pencil"></span></a>
+                        <a class="btn pull-right" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><span class="fa fa-trash"></span></a>
+                      </p>
+                  </div>
+                  
+                  <div class="modal fade" id="<?php echo $id; ?>" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+                        <div class="modal-body">
+                          <img src="<?php echo base_url().'assets/gambars/'.$cover; ?>">
+                        </div>
+                          <div class="col-md-12 description">
+                            <h4><?php echo $judul; ?></h4>
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              
+            
+          <?php endforeach;?>
+        
+      
+    </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
