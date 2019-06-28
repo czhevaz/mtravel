@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
   
+
 	<?php 
             function limit_words($string, $word_limit){
                 $words = explode(" ",$string);
@@ -55,63 +56,117 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
+        <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#largeModal"><span class="fa fa-upload"></span> Post New</a>
+        
         Wisata
         <small></small>
       </h1>
-      <ol class="breadcrumb">
+      <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Wisata</li>
-      </ol>
+      </ol> -->
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-           
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Add New</a>
+        <?php
+          $no=0;
+            foreach($data->result_array() as $a):
+                $no++;
+                $id=$a['idwisata'];
+                $gambar=$a['gambar'];
+                $nama_wisata=$a['nama_wisata'];
+                $deskripsi=$a['deskripsi'];
+                $post_by=$a['created_by'];
+                $date_created=$a['date_created'];
+                $isi=limit_words($a['deskripsi'],25);
+                $query=$this->db->query("SELECT * FROM user where username ='$post_by'");
+                $user = $query->row();
+               
+        ?>
+        <div class="col-md-6">
+          <!-- Box Comment -->
+          <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="user-block">
+                <img class="img-circle" src="<?php echo base_url().'assets/gambars/'.$gambar;?>" alt="User Image">
+                <span class="username"><a href="#"><?php echo $user->nama; $date_created;?>.</a></span>
+                <span class="description">Shared publicly - <?php echo $date_created;?></span>
+              </div>
+              <!-- /.user-block -->
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <a class="btn btn-box-tool" data-toggle="modal" data-target="#ModalUpdate<?php echo $id;?>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-box-tool" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fa fa-times"></i></a>
+              </div>
+              <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:13px;">
-                <thead>
-                <tr>
-          					<th>Gambar</th>
-          					<th>Wisata</th>
-                    <th style="text-align:right;">Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-          				<?php
-                    $no=0;
-                        foreach($data->result_array() as $a):
-                            $no++;
-                            $id=$a['idwisata'];
-                            $gambar=$a['gambar'];
-                            $nama_wisata=$a['nama_wisata'];
-                    ?>
-                <tr>
-                  <td><img src="<?php echo base_url().'assets/gambars/'.$gambar;?>" style="width:90px;"></td>
-                  <td><?php echo $nama_wisata;?></td>
-                  <td style="text-align:right;">
-                        <a class="btn" data-toggle="modal" data-target="#ModalUpdate<?php echo $id;?>"><span class="fa fa-pencil"></span></a>
-                        <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><span class="fa fa-trash"></span></a>
-                  </td>
-                </tr>
-				      <?php endforeach;?>
-                </tbody>
-              </table>
+              <img class="img-responsive pad" src="<?php echo base_url().'assets/gambars/'.$gambar;?>" alt="Photo">
+
+              <p><h4><b><?php echo $nama_wisata;?></b></h4></p>
+              <p><article><?php echo $deskripsi;?></article></p>
+              <!-- button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> -->
+              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+              <span class="pull-right text-muted">127 likes - 3 comments</span>
             </div>
             <!-- /.box-body -->
+            <div class="box-footer box-comments">
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        Maria Gonzales
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- /.box-comment -->
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        Luna Stark
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- /.box-comment -->
+            </div>
+            <!-- /.box-footer -->
+            <div class="box-footer">
+              <form action="#" method="post">
+                <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push">
+                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                </div>
+              </form>
+            </div>
+            <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </div>
         <!-- /.col -->
+        <?php endforeach;?>
+        
+        <!-- /.col -->
       </div>
-      <!-- /.row -->
+      
+      
     </section>
     <!-- /.content -->
   </div>
@@ -274,6 +329,9 @@
 <script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
+
+<script src="<?php echo base_url().'assets/plugins/readmore/readmore.js'?>"></script>
+
 <!-- AdminLTE App -->
 <script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
 <!-- AdminLTE for demo purposes -->
@@ -335,5 +393,13 @@
     <?php else:?>
 
     <?php endif;?>
+ <script type="text/javascript">
+   $('article').readmore({
+    collapsedHeight: 80,
+    speed: 200,
+    lessLink: '<a href="#">Read less</a>'
+  });
+
+ </script>   
 </body>
 </html>

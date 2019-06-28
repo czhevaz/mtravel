@@ -10,8 +10,8 @@ class Mwisata extends CI_Model{
 		$hasil=$this->db->query("select * from wisata order by idwisata DESC limit $offset,$limit");
 		return $hasil;
 	}
-	function SimpanWisata($nama_wisata,$deskripsi,$gambar){
-		$hasil=$this->db->query("INSERT INTO wisata(nama_wisata,deskripsi,gambar) VALUES ('$nama_wisata','$deskripsi','$gambar')");
+	function SimpanWisata($nama_wisata,$deskripsi,$gambar, $user){
+		$hasil=$this->db->query("INSERT INTO wisata(nama_wisata,deskripsi,gambar,created_by,date_created) VALUES ('$nama_wisata','$deskripsi','$gambar','$user',NOW())");
 		return $hasil;
 	}
 	function tampil_wisata(){

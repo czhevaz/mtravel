@@ -42,8 +42,9 @@ class Wisata extends CI_Controller{
 	            $gambar=$gbr['file_name'];
                 $nama_wisata=$this->input->post('nama_wisata');
                 $deskripsi=$this->input->post('deskripsi');
+                $user=$this->session->userdata('user');
 
-				$this->mwisata->SimpanWisata($nama_wisata,$deskripsi,$gambar);
+				$this->mwisata->SimpanWisata($nama_wisata,$deskripsi,$gambar,$user);
 				echo $this->session->set_flashdata('msg','success');
 				redirect('backend/wisata');
 		}else{
