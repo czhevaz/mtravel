@@ -7,6 +7,8 @@ class Wisata extends CI_Controller{
             redirect($url);
         };
         $this->load->model('mwisata');
+        $this->load->model('mcomment');
+        $this->load->model('mlike');
         $this->load->library('upload');
     }
     function index(){
@@ -112,5 +114,51 @@ class Wisata extends CI_Controller{
 	        echo "Halaman tidak ditemukan";
 	    }
     }
+
+
+    public function simpan_comment(){
+
+      $pesan = $this->input->post('pesan');;
+      $wisataId = $this->input->post('wisataId');
+      $user=$this->session->userdata('user');
+      $this->mcomment->simpan_comment($pesan,$wisataId,$user);
+
+      $wisataList = $this->mcomment->get_all_by_wisata_id($wisataId)->result();	
+      $response = array(
+        'success' => true,
+        'data'=>$wisataList,
+        'info' => 'Data Tersimpan');
+
+      $this->output
+        ->set_status_header(201)
+        ->set_content_type('application/json', 'utf-8')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+        exit;
+  	}
+
+
+  	public function simpan_like(){
+
+      $status = $this->input->post('status');;
+      $wisataId = $this->input->post('wisataId');
+      $user=$this->session->userdata('user');
+      
+      $s=$this->mlike->simpan_like($status,$wisataId,$user);
+
+
+      //$wisataList = $this->mlike->get_all_by_wisata_id($wisataId)->result();	
+      $response = array(
+        'success' => true,
+        'data'=>$wisataId,
+        'info' => 'Data Tersimpan');
+
+      $this->output
+        ->set_status_header(201)
+        ->set_content_type('application/json', 'utf-8')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+        exit;
+  	}
 
 }

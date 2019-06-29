@@ -15,7 +15,7 @@
             </span>
           </a>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-pencil"></i>
             <span>Post</span>
@@ -27,7 +27,7 @@
             <li><a href="<?php echo base_url().'backend/post/add_post'?>"><i class="fa fa-thumb-tack"></i> Add New</a></li>
             <li><a href="<?php echo base_url().'backend/post'?>"><i class="fa fa-list"></i> Post List</a></li>
           </ul>
-        </li>
+        </li> -->
         <?php if($this->session->userdata('akses')=='1'){ ?>
         <li>
           <a href="<?php echo base_url().'backend/pengguna'?>">
@@ -98,7 +98,7 @@
           </a>
         </li>
  -->
-        <li>
+      <!--   <li>
           <a href="<?php echo base_url().'backend/inbox'?>">
             <i class="fa fa-envelope"></i> <span>Inbox</span>
             <span class="pull-right-container">
@@ -114,7 +114,7 @@
               <small class="label pull-right bg-yellow"><?php echo $jum_testimoni;?></small>
             </span>
           </a>
-        </li>
+        </li> -->
          <li>
           <a href="<?php echo base_url().'administrator/logout'?>">
             <i class="fa fa-sign-out"></i> <span>Sign Out</span>

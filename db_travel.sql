@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2019 at 07:13 AM
+-- Generation Time: Jun 29, 2019 at 07:11 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -40,12 +40,11 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`idalbum`, `jdl_album`, `cover`, `jml`) VALUES
-(3, 'Singgalang Expedition', 'file_1460289167.jpg', 1),
-(4, 'Fly with Hammock', 'file_1460289974.jpg', 2),
-(5, 'Marapi Expedition', 'file_1460363423.JPG', 0),
-(6, 'Volcano', 'file_1460367801.jpg', 0),
-(7, 'Sunrise', 'file_1460367841.jpg', 0),
-(9, 'Diatas Awan', 'file_1460368005.jpg', 2);
+(5, 'Marapi Expedition', 'e67153fcc7f266aca2117d427c6faea2.jpg', 0),
+(6, 'Volcano', 'a6e0ae94166d0049e269195570b6f684.jpg', 0),
+(7, 'Sunrise', '9de62b52f7f24e5b1303687e383425e4.jpg', 0),
+(9, 'Diatas Awan', 'f653344985261604c2cc53391778d8a4.jpg', 2),
+(10, 'Singgalang Expedition', '1ff57ed6e5d171ee4e75e5531b75d378.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -84,6 +83,31 @@ INSERT INTO `berita` (`idberita`, `judul`, `isi`, `tglpost`, `gambar`, `tgl_last
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` bigint(20) NOT NULL,
+  `pesan` varchar(1000) DEFAULT '''''',
+  `wisata_id` int(11) NOT NULL,
+  `created_by` varchar(1000) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `pesan`, `wisata_id`, `created_by`, `date_created`) VALUES
+(8, 'tesd', 5, 'admin', '2019-06-29 10:39:19'),
+(9, 'asdas', 5, 'admin', '2019-06-29 10:49:06'),
+(10, 'bagooos', 5, 'asev_setiawam', '2019-06-29 10:55:20'),
+(11, 'awee awee', 6, 'admin', '2019-06-29 11:06:44'),
+(12, 'yoi menf', 6, 'admin', '2019-06-29 11:08:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `galeri`
 --
 
@@ -93,15 +117,6 @@ CREATE TABLE `galeri` (
   `gbr_galeri` varchar(40) DEFAULT NULL,
   `albumid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `galeri`
---
-
-INSERT INTO `galeri` (`id_galeri`, `jdl_galeri`, `gbr_galeri`, `albumid`) VALUES
-(2, 'Enjoy in the morning at Telaga Dewi', 'file_1462540960.jpg', 4),
-(3, 'Make your life be enjoy', 'file_1462540975.jpg', 4),
-(4, 'Waterfall at Singgalang Mountain', 'file_1460301447.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -146,6 +161,28 @@ INSERT INTO `metode_bayar` (`id_metode`, `metode`, `bank`, `norek`, `atasnama`) 
 (4, 'Transfer Bank', 'BCA', '5485-01-007458-53-6', 'M Fikri Setiadi'),
 (5, 'Transfer Bank', 'BRI', '5485-01-007458-53-6', 'M Fikri Setiadi'),
 (6, 'Transfer Bank', 'Mega', '5485-01-007458-53-6', 'M Fikri Setiadi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mlike`
+--
+
+CREATE TABLE `mlike` (
+  `id` bigint(20) NOT NULL,
+  `wisata_id` int(11) NOT NULL,
+  `created_by` varchar(1000) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mlike`
+--
+
+INSERT INTO `mlike` (`id`, `wisata_id`, `created_by`, `date_created`, `status`) VALUES
+(4, 6, 'admin', '2019-06-29 12:08:33', b'1'),
+(5, 6, 'asev_setiawam', '2019-06-29 12:10:22', b'1');
 
 -- --------------------------------------------------------
 
@@ -1175,7 +1212,12 @@ INSERT INTO `tbl_pengunjung` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung
 (907, '2017-07-10 02:07:19', '::1', 'Firefox'),
 (908, '2019-05-24 00:48:35', '::1', 'Chrome'),
 (909, '2019-06-13 13:05:12', '::1', 'Chrome'),
-(910, '2019-06-17 00:35:45', '::1', 'Chrome');
+(910, '2019-06-17 00:35:45', '::1', 'Chrome'),
+(911, '2019-06-18 09:39:22', '::1', 'Chrome'),
+(912, '2019-06-18 09:42:19', '192.168.0.104', 'Chrome'),
+(913, '2019-06-23 02:56:13', '::1', 'Chrome'),
+(914, '2019-06-28 02:07:13', '::1', 'Chrome'),
+(915, '2019-06-29 03:00:23', '::1', 'Chrome');
 
 -- --------------------------------------------------------
 
@@ -1223,7 +1265,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idadmin`, `nama`, `username`, `password`, `level`, `photo`, `alamat`, `status`) VALUES
-(2, 'Admin', 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '4200d2514abf45755943526b74474c16.jpg', NULL, b'0');
+(2, 'Admin', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '6da35fec2446d89215236e6f386541db.png', NULL, b'0'),
+(8, 'asep', 'asev_setiawam', 'e10adc3949ba59abbe56e057f20f883e', '3', 'e2c3a65f5fbd7b2f658b634c0d4c9f98.jpg', 'tes', b'0'),
+(9, 'asep', 'asevsetiawan88@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '3', 'a1550a23c310a1420e9b45522e9b9409.png', 'tes', b'0');
 
 -- --------------------------------------------------------
 
@@ -1235,17 +1279,18 @@ CREATE TABLE `wisata` (
   `idwisata` int(11) NOT NULL,
   `nama_wisata` varchar(100) DEFAULT NULL,
   `deskripsi` text,
-  `gambar` varchar(50) DEFAULT NULL
+  `gambar` varchar(50) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `created_by` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `wisata`
 --
 
-INSERT INTO `wisata` (`idwisata`, `nama_wisata`, `deskripsi`, `gambar`) VALUES
-(2, 'Pulau Pagang', '<p>Pulau Pagang terletak didaerah Bungus, masih wilayah Kotamadya Padang, secara administrasi Pulau Pagang termasuk daerah Tarusan Pesisir Selatan,tapi lebih familiar termasuk wilayah Pagang, baru populer 1 tahun belakangan ini, setelah pulau Sikuai yang terkenal itu ,ditutup untuk umum dikarenakan permasalahan manajemen, sayang sekali memang pulau yg sudah lengkap fasilitasnya ini sekarang sudah menjadi semak belukar,tapi hikmah dibalik itu pulau berada sebelah kiri Sikuai ini menjadi lebih terkenal..</p>\r\n<p>Perjalanan lebih kurang 40 menit menggunakan boat kita sudah sampai di pulau berpasir putih dan halus ini, seolah tidak sabar utk berenang di airnya yang jernih, wisatawan biasanya langsung melompat sebelum boat sampai di bibir pantai..</p>\r\n<p>Aktivitas air yang biasa dilakukan wisatawan di pulau Pagang ini adalah banana boat, mengelilingi pulau, snorkling dan fasilitas foto underwater, memancing, berenang di airnya yang jernih.</p>\r\n<p>Pulau Pagang memiliki luas + 10 hektar dan merupakan pulau yang masih asri. Pulau Pagang langsung berhadapan dengan Samudera Hindia serta memiliki&nbsp; keindahan yang mempesona diantaranya hamparan pasir putih berpadu dengan jernih dan birunya air laut memberikan pesona tersendiri.</p>\r\n<p>Selain itu pengunjungpun dapat bermain di tepian pantai yang dangkal dan jernih, memancing dan juga menikmati perbukitan yang hijau&nbsp; di seberang Pulau Pagang.</p>\r\n<p>Kegiatan snorkling di Pulau Pagang ini juga cukup menarik karena pulau ini kaya akan terumbu karang. Sebagaimana dikutip dari website Kementerian Kelautan dan Perikanan, Pulau Pagang didominasi oleh kelompok karang diantaranya Genus Foliose, seperti&nbsp;&nbsp;<em>Montipora foliosa, Montipora danae, Encrusing Genus Montipora, Asreopora sp., Oxypora lacare, Massive Genus, Favites sp, Porites sp, Porites lute, Goniastre sp</em>&nbsp;dan&nbsp;<em>Favia sp</em>.</p>\r\n<p>Selain kaya akan terumbu karang, Pulau Pagang juga memiliki jenis ikan diantaranya&nbsp;<em>Chatedon trifasciatus, Acanthurus pyroferus, Ctenochaetus striatus, Caesio cunning, Scolopsis bilinett</em>a, dan masih banyak lagi kekayaan biota bawah laut.</p>\r\n<p>Untuk menuju pulau ini, Anda dapat menggunakan&nbsp; perahu nelayan maupun perahu wisata, dari pelabuhan Muaro di Kota Padang, dengan waktu tempuh + 1 jam. Anda dapat pula melalui Pelabuhan Bungus, Teluk Kabung + 40 Menit.</p>\r\n<p>Sumatera Barat merupakan salah satu daerah tujuan wisata yang patut untuk dipertimbangkan mengisi waktu libur mendatang. Selain indahnya pesona alam,&nbsp; Sumatera Barat juga memiliki daerah tujuan wisata kuliner yang dapat mengoyang lidah kita. Wisata budayanya&nbsp; dapat menambah pengetahuan budaya kita, sedang wisata sejarah&nbsp; mengingatkan kita akan perjuangan para pahlawan&nbsp; meraih kemerdekaan.</p>', 'file_1463326038.png'),
-(3, 'Pulau Pasumpahan', '<p><strong>Pulau Pasumpahan</strong>&nbsp;adalah sebuah pulau&nbsp;yang berada di perairan kecamatan Bungus Teluk Kabung, kota Padang, provinsi Sumatera Barat, Indonesia&nbsp;. Klaim akan keindahan lautnya membuat pulau ini mulai dikenal oleh wisatawan lokal dan internasional.</p>\r\n<p>Pulau Pasumpahan berada sekitar 200 meter dari Pulau Sikuai. Pulau ini memiliki obyek wisata pantai pasir putih dengan terumbu karang&nbsp;yang masih terjaga.</p>\r\n<p>Pulau ini diharapkan akan menjadi daerah tujuan wisata unggulan di provinsi Sumatera Barat. Pulau ini terletak di sebelah barat Pulau Setan Kecil, untuk menempuh pulau ini memakan waktu 10 menit dari Sungai Pisang dengan mesin 45 PK.</p>\r\n<p>Potensi wisata bawah laut di kawasan wisata bahari pantai barat Kota Padang adalah kawasan ekosistem terumbu karang yang terdapat hampir di setiap pulau, di antaranya di Pulau Gosong. Selain dari terumbu karang berbagai jenis ikan karang/ikan-ikan hias juga sangat menarik untuk dinikmati oleh wisatawan. Di perairan Kota Padang ditemukan 21 jenis ikan kepe-kepe yang didominasi oleh Chaetodon trifascialis. Lokasi-Iokasi penyelaman yang sudah mulai dipasarkan kepada wisatawan antara lain Pulau Gosong, Pulau Ular, Pulau Sirandah, dan Pulan Pandan.</p>\r\n<p>Pasumpahan kini tengah diincar investor asing untuk dikembangkan sebagai obyek wisata yang di unggulkan di daerah sumatera barat. Fasilitas pendukung untuk itu tengah dibangun di pulau ini.</p>', 'file_1463322397.png'),
-(4, 'Pulau Pamutusan', '<p>Sebagian orang mungkin belum pernah mendengar, apalagi mengunjungi&nbsp;<strong>Pulau Pamutusan</strong>&nbsp;di Sumatera Barat. Tapi, bagi yang pernah berkunjung ke pulau yang ada di Sumatera Barat itu, bisa jadi sudah merencanakan untuk kembali ke sana.<br /> <br /> Memang, Sumatera Barat terkenal dengan kawasan yang dikelilingi ratusan pulau kecil yang dihiasi tekstur perbukitan dan biota laut yang mengagumkan. Salah satunya&nbsp;<strong>Pulau Pamutusan</strong>.<br /> <br /> Terletak di kawasan Bungus Teluk Kabung, Padang atau sekitar satu jam perjalanan dari Kota Padang, pulau ini dikenal dengan surga tersembunyi yang belum banyak terjamah wisatawan.<br /> <strong><br /> Pulau Pamutusan</strong>&nbsp;bisa ditempuh dengan menggunakan kapal kecil dari Pelabuhan Muara Kota Padang sekitar satu jam perjalanan laut. Pulau dengan luas 8 hektare ini memiliki pasir putih serta tumbuhan pohon kelapa dan tanaman mangrove serta perbukitan yang masih hijau.<br /> <br /> Pulau ini diberi nama Pamutusan karena terdapat semenanjung yang berubah menjadi daratan berpasir putih ketika air laut surut.<br /> <br /> Untuk menjaga kebersihan pulau tersebut, dipungut retribusi untuk setiap tamu yang datang oleh seorang penjaga pulau yang sehari-hari menetap di sana.<br /> &nbsp;<br /> Pulau ini ibarat sepotong surga yang tersembunyi di tengah Samudera Hindia yang belum banyak dijamah oleh wisatawan karena belum pernah terekspose. Pulau ini cocok bagi wisatawan penggemar landscape atau fotografer karena banyak terdapat spot-spot cantik dengan hamparan pemandangan nan asri dan indah, walaupun ditempuh dengan sedikit tracking untuk mencapai puncak bukitnya.<br /> <br /> Selain itu, biota ikan hias dan terumbu karang yang terdapat di dalam laut di sekitar pulau ini juga menjadi daya tarik tersendiri bagi penggemar snorkling. Nah, untuk melepas kepenatan setelah berwisata, terdapat sebuah cottage yang bisa disinggahi dan bersantai menikmati pemandangan alam pulau-pulau kecil yang menghampar di depannya.</p>', 'file_1463317841.png');
+INSERT INTO `wisata` (`idwisata`, `nama_wisata`, `deskripsi`, `gambar`, `date_created`, `created_by`) VALUES
+(5, 'Pulau Harapan', '<p>Sebagian orang mungkin belum pernah mendengar, apalagi mengunjungi&nbsp;<strong>Pulau Pamutusan</strong>&nbsp;di Sumatera Barat. Tapi, bagi yang pernah berkunjung ke pulau yang ada di Sumatera Barat itu, bisa jadi sudah merencanakan untuk kembali ke sana.<br />\r\n<br />\r\nMemang, Sumatera Barat terkenal dengan kawasan yang dikelilingi ratusan pulau kecil yang dihiasi tekstur perbukitan dan biota laut yang mengagumkan. Salah satunya&nbsp;<strong>Pulau Pamutusan</strong>.<br />\r\n<br />\r\nTerletak di kawasan Bungus Teluk Kabung, Padang atau sekitar satu jam perjalanan dari Kota Padang, pulau ini dikenal dengan surga tersembunyi yang belum banyak terjamah wisatawan.<br />\r\n<br />\r\n<strong>Pulau Pamutusan</strong>&nbsp;bisa ditempuh dengan menggunakan kapal kecil dari Pelabuhan Muara Kota Padang sekitar satu jam perjalanan laut. Pulau dengan luas 8 hektare ini memiliki pasir putih serta tumbuhan pohon kelapa dan tanaman mangrove serta perbukitan yang masih hijau.<br />\r\n<br />\r\nPulau ini diberi nama Pamutusan karena terdapat semenanjung yang berubah menjadi daratan berpasir putih ketika air laut surut.<br />\r\n<br />\r\nUntuk menjaga kebersihan pulau tersebut, dipungut retribusi untuk setiap tamu yang datang oleh seorang penjaga pulau yang sehari-hari menetap di sana.<br />\r\n&nbsp;<br />\r\nPulau ini ibarat sepotong surga yang tersembunyi di tengah Samudera Hindia yang belum banyak dijamah oleh wisatawan karena belum pernah terekspose. Pulau ini cocok bagi wisatawan penggemar landscape atau fotografer karena banyak terdapat spot-spot cantik dengan hamparan pemandangan nan asri dan indah, walaupun ditempuh dengan sedikit tracking untuk mencapai puncak bukitnya.<br />\r\n<br />\r\nSelain itu, biota ikan hias dan terumbu karang yang terdapat di dalam laut di sekitar pulau ini juga menjadi daya tarik tersendiri bagi penggemar snorkling. Nah, untuk melepas kepenatan setelah berwisata, terdapat sebuah cottage yang bisa disinggahi dan bersantai menikmati pemandangan alam pulau-pulau kecil yang menghampar di depannya.</p>\r\n', 'f8e61ef64cd3dec2e8a266bdcb9eb7f5.jpg', '2019-06-28 15:54:29', 'admin'),
+(6, 'Pulau Harapan', '<p>Tah eta&nbsp;</p>\r\n', 'f87936855da139a96fb6e4e95c85ffe5.jpg', '2019-06-29 10:55:08', 'asev_setiawam');
 
 --
 -- Indexes for dumped tables
@@ -1265,6 +1310,13 @@ ALTER TABLE `berita`
   ADD KEY `adminid` (`user`);
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `wisata_fk` (`wisata_id`);
+
+--
 -- Indexes for table `galeri`
 --
 ALTER TABLE `galeri`
@@ -1282,6 +1334,12 @@ ALTER TABLE `kategori_paket`
 --
 ALTER TABLE `metode_bayar`
   ADD PRIMARY KEY (`id_metode`);
+
+--
+-- Indexes for table `mlike`
+--
+ALTER TABLE `mlike`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `orders`
@@ -1344,19 +1402,25 @@ ALTER TABLE `wisata`
 -- AUTO_INCREMENT for table `album`
 --
 ALTER TABLE `album`
-  MODIFY `idalbum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idalbum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `idberita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idberita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `galeri`
 --
 ALTER TABLE `galeri`
-  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kategori_paket`
@@ -1369,6 +1433,12 @@ ALTER TABLE `kategori_paket`
 --
 ALTER TABLE `metode_bayar`
   MODIFY `id_metode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `mlike`
+--
+ALTER TABLE `mlike`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `paket`
@@ -1392,7 +1462,7 @@ ALTER TABLE `tbl_inbox`
 -- AUTO_INCREMENT for table `tbl_pengunjung`
 --
 ALTER TABLE `tbl_pengunjung`
-  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=911;
+  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=916;
 
 --
 -- AUTO_INCREMENT for table `testimoni`
@@ -1404,17 +1474,23 @@ ALTER TABLE `testimoni`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `wisata`
 --
 ALTER TABLE `wisata`
-  MODIFY `idwisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idwisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `wisata_fk` FOREIGN KEY (`wisata_id`) REFERENCES `wisata` (`idwisata`);
 
 --
 -- Constraints for table `galeri`

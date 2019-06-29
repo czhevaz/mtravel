@@ -71,6 +71,18 @@
     <section class="content">
       <div class="row">
         <?php
+          function get_day_name($timestamp) {
+
+              $date = date('yyyy-mm-dd', $timestamp);
+
+              if($date == date('yyyy-mm-dd')) {
+                $date = 'Today';
+              } 
+              
+              return $date;
+          }
+
+          $username=$this->session->userdata('user');  
           $no=0;
             foreach($data->result_array() as $a):
                 $no++;
@@ -83,6 +95,11 @@
                 $isi=limit_words($a['deskripsi'],25);
                 $query=$this->db->query("SELECT * FROM user where username ='$post_by'");
                 $user = $query->row();
+                $comments=$this->db->query("SELECT * FROM comment WHERE wisata_id=$id ORDER BY date_created asc");  
+                $likes=$this->db->query("SELECT * FROM mlike WHERE wisata_id=$id ORDER BY date_created asc");
+                
+                $likesStatus=$this->db->query("SELECT * FROM mlike WHERE wisata_id=$id AND created_by='$username'");
+
                
         ?>
         <div class="col-md-6">
@@ -90,7 +107,7 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="<?php echo base_url().'assets/gambars/'.$gambar;?>" alt="User Image">
+                <img class="img-circle" src="<?php echo base_url().'assets/images/'.$user->photo;?>" alt="User Image">
                 <span class="username"><a href="#"><?php echo $user->nama; $date_created;?>.</a></span>
                 <span class="description">Shared publicly - <?php echo $date_created;?></span>
               </div>
@@ -98,8 +115,10 @@
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
+                <?php if($user->username == $this->session->userdata('user') || $this->session->userdata('akses')=='1'){ ?>
                 <a class="btn btn-box-tool" data-toggle="modal" data-target="#ModalUpdate<?php echo $id;?>"><i class="fa fa-pencil"></i></a>
                 <a class="btn btn-box-tool" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fa fa-times"></i></a>
+                <?php } ?>  
               </div>
               <!-- /.box-tools -->
             </div>
@@ -107,54 +126,51 @@
             <div class="box-body">
               <img class="img-responsive pad" src="<?php echo base_url().'assets/gambars/'.$gambar;?>" alt="Photo">
 
-              <p><h4><b><?php echo $nama_wisata;?></b></h4></p>
+              <p><h4><b><?php  echo $nama_wisata;?></b></h4></p>
               <p><article><?php echo $deskripsi;?></article></p>
               <!-- button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> -->
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-              <span class="pull-right text-muted">127 likes - 3 comments</span>
+              <?php if($likesStatus->row()->status==1){?>
+                  <button  type="button" class="btn btn-primary btn-xs"><i class="fa fa-thumbs-up" ></i> like</button>  
+              <?php }else{?>
+                  <button  type="button" class="btn btn-default btn-xs" onclick="insertLike(<?php echo $id;?>,1)"><i class="fa fa-thumbs-o-up" ></i> Like</button>  
+              <?php } ?>  
+              
+              <span class="pull-right text-muted"><?php echo $likes->num_rows(); ?> likes - <?php echo $comments->num_rows(); ?> comments</span>
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
+              <?php
+                
+                  foreach($comments->result_array() as $c):
+                      $commentBy=  $c["created_by"];
+                      $userComment=$this->db->query("SELECT * FROM user where username ='$commentBy'")->row();  
+              ?>
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                <img class="img-circle img-sm" src="<?php echo base_url().'assets/images/'.$userComment->photo;?>" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        Maria Gonzales
-                        <span class="text-muted pull-right">8:03 PM Today</span>
+                        <?php echo $userComment->nama;?>
+                        <span class="text-muted pull-right"><?php echo $c["date_created"];?></span>
                       </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
+                  <?php echo $c["pesan"];?>
                 </div>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        Luna Stark
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
+              <?php endforeach;?>
+              
             </div>
             <!-- /.box-footer -->
             <div class="box-footer">
-              <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+              
+                <!-- <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text"> -->
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                  <input id="comment_<?php echo $id;?>" type="text" class="form-control input-sm" placeholder="Press enter to post comment" onkeypress="if(event.keyCode == 13) insertComment(<?php echo $id;?>)">
                 </div>
-              </form>
+              
             </div>
             <!-- /.box-footer -->
           </div>
@@ -394,12 +410,77 @@
 
     <?php endif;?>
  <script type="text/javascript">
+  //readmore less
    $('article').readmore({
     collapsedHeight: 80,
     speed: 200,
     lessLink: '<a href="#">Read less</a>'
   });
 
+  function appendItem(){
+    /*<div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        Maria Gonzales
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+                <!-- /.comment-text -->
+              </div>*/
+  } 
+
+  function insertComment(id) 
+  {
+        
+    var pesan = $('#comment_'+id).val();    
+       console.log(pesan);
+
+        //code to execute here
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url().'backend/wisata/simpan_comment?id='?>"+id,
+        dataType : 'json',
+        data:{pesan:pesan,wisataId:id},
+        success: function(d){
+          var dInput = this.value;
+         if(d.success){
+          location.reload();
+         }
+          
+        },
+        error: function( req, status, err ) {
+            alert( 'something went wrong', status, err );
+        }
+      });
+        
+    
+    $('#comment_'+id).val('');            
+  }  
+
+  // like button 
+   function insertLike(id,status) {
+      alert(' Like This');
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url().'backend/wisata/simpan_like?id='?>"+id,
+        dataType : 'json',
+        data:{status:status,wisataId:id},
+        success: function(d){
+          var dInput = this.value;
+           if(d.success){
+            location.reload();
+           }
+        },
+        error: function( req, status, err ) {
+            alert( 'something went wrong', status, err );
+        }
+      });
+  };
  </script>   
 </body>
 </html>
