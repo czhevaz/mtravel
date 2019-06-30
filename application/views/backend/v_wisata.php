@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -42,6 +43,57 @@
 	
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+  <style type="text/css">
+    .multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        // use your favourite prefixer here
+        transition: 500ms ease-in-out left;
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+}
+
+// non-related styling:
+body{
+  background: #333;
+  color: #ddd;
+}
+h1{
+  color: white;
+  font-size: 2.25em;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
+}
+  </style>
 <div class="wrapper">
 
    <?php 
@@ -96,9 +148,9 @@
                 $query=$this->db->query("SELECT * FROM user where username ='$post_by'");
                 $user = $query->row();
                 $comments=$this->db->query("SELECT * FROM comment WHERE wisata_id=$id ORDER BY date_created asc");  
-                $likes=$this->db->query("SELECT * FROM mlike WHERE wisata_id=$id ORDER BY date_created asc");
-                
+                $likes=$this->db->query("SELECT * FROM mlike WHERE wisata_id=$id ORDER BY date_created asc");   
                 $likesStatus=$this->db->query("SELECT * FROM mlike WHERE wisata_id=$id AND created_by='$username'");
+                $makanan=$this->db->query("SELECT * FROM makanan WHERE wisata_id=$id ORDER BY date_created asc");
 
                
         ?>
@@ -125,7 +177,28 @@
             <!-- /.box-header -->
             <div class="box-body">
               <img class="img-responsive pad" src="<?php echo base_url().'assets/gambars/'.$gambar;?>" alt="Photo">
+               <div class="carousel slide multi-item-carousel" id="theCarousel_<?php echo $id;?>">
+                  <div class="carousel-inner">
+                
+                  <?php
+                      $i=0;
+                      foreach($makanan->result_array() as $m):
+                        $i++ ;     
+                        $gambarMakanan=$m['photo'];
+                  ?>
 
+                  <div class="item <?php if($i==1){echo 'active';} ?>">
+                    <div class="col-xs-4"><a href="#1"><img src="<?php echo base_url().'assets/gambars/'.$gambarMakanan;?>" class="img-responsive"></a></div>
+                  </div>
+                  <?php endforeach;?>
+            
+            <!--  Example item end -->
+                  </div>
+              <a class="left carousel-control" href="#theCarousel_<?php echo $id;?>" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+              <a class="right carousel-control" href="#theCarousel_<?php echo $id;?>" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div> 
+      <br/>
+      <a class="btn btn-success btn-sm pull-right open-AddBookDialog"  data-id="<?php echo $id;?>" data-toggle="modal" data-target="#modal-makanan"><span class="fa fa-upload"></span> </a>
               <p><h4><b><?php  echo $nama_wisata;?></b></h4></p>
               <p><article><?php echo $deskripsi;?></article></p>
               <!-- button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> -->
@@ -297,6 +370,51 @@
     </div>
 </div>
 
+<!-- ============ MODAL ADD Makanan =============== -->
+<div class="modal fade" id="modal-makanan" tabindex="-1" role="dialog" aria-labelledby="modal-makanan" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 class="modal-title" id="myModalLabel">Tambah Makanan</h3>
+    </div>
+    <form class="form-horizontal" method="post" action="<?php echo base_url().'backend/wisata/simpan_makanan'?>" enctype="multipart/form-data">
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" >Makanan</label>
+                <div class="col-xs-8">
+                    <input name="nama_makanan" class="form-control" type="text" placeholder="Nama Makanan..." required>
+                    <input type="hidden" name="wisataId" id="wisataId" value=""/>
+                </div>
+            </div>
+                   
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" >Deskripsi</label>
+                <div class="col-xs-8">
+                    <textarea class="ckeditor" name="deskripsi" rows="10" cols="10"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" >Gambar</label>
+                <div class="col-xs-8">
+                    <input type="file" name="filefoto" required>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-flat" data-dismiss="modal" aria-hidden="true">Tutup</button>
+            <button class="btn btn-primary btn-flat">Simpan</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>
+
 <?php endforeach;?>
 	
 	<?php
@@ -406,6 +524,18 @@
                     bgColor: '#7EC857'
                 });
         </script>
+    <?php elseif($this->session->flashdata('msg')=='success-makanan'):?>
+        <script type="text/javascript">
+                $.toast({
+                    heading: 'Success',
+                    text: "Makanan berhasil di update",
+                    showHideTransition: 'slide',
+                    icon: 'info',
+                    hideAfter: false,
+                    position: 'bottom-right',
+                    bgColor: '#00C9E6'
+                });
+        </script>    
     <?php else:?>
 
     <?php endif;?>
@@ -481,6 +611,33 @@
         }
       });
   };
+
+
+  // Instantiate the Bootstrap carousel
+$('.multi-item-carousel').carousel({
+  interval: false
+});
+
+// for every slide in carousel, copy the next slide's item in the slide.
+// Do the same for the next, next item.
+$('.multi-item-carousel .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  } else {
+    $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
+
+$(document).on("click", ".open-AddBookDialog", function () {
+     var wisataId = $(this).data('id');
+     $(".modal-body #wisataId").val( wisataId );
+});
  </script>   
 </body>
 </html>
