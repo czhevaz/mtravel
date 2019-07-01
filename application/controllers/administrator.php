@@ -7,9 +7,16 @@ class Administrator extends CI_Controller{
     function index(){
         $this->load->view('backend/v_login');
     }
+
     function auth(){
         $username=strip_tags(str_replace("'", "", $this->input->post('username')));
         $password=strip_tags(str_replace("'", "", $this->input->post('password')));
+
+        if(!$username){
+            $username = $this->session->userdata('username');
+            $password = $this->session->userdata('password');      
+        }
+        
         $u=$username;
         $p=$password;
         $cadmin=$this->mlogin->cekadmin($u,$p);

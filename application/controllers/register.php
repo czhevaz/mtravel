@@ -51,8 +51,13 @@ class Register extends CI_Controller{
                     redirect('register');
             	}else{
                     $this->mpengguna->simpan_user($nama,$username,$password,$level,$gambar,$alamat);
+                     $data = array(
+                        'username' => $username,
+                        'pass' => $password
+                    );
+                    $this->session->set_userdata($data);
                     echo $this->session->set_flashdata('success','success');
-                    redirect('register'); 
+                    redirect('administrator/auth/');
                 }
                 
         }else{
