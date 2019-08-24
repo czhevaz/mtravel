@@ -60,7 +60,11 @@ class Administrator extends CI_Controller{
         }
     }
         function berhasillogin(){
-            redirect('backend/dashboard');
+            if($this->session->userdata('akses')=='1'){   
+                redirect('backend/dashboard');
+            }else{
+                redirect('backend/wisata');
+            }
         }
         function gagallogin(){
             $url=base_url('administrator');

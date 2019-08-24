@@ -7,6 +7,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Menu Utama</li>
+        <?php if($this->session->userdata('akses')=='1'){ ?>
         <li class="active">
           <a href="<?php echo base_url().'backend/dashboard'?>">
             <i class="fa fa-home"></i> <span>Dashboard</span>
@@ -15,6 +16,7 @@
             </span>
           </a>
         </li>
+        <?php } ?>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-pencil"></i>
@@ -54,6 +56,16 @@
             </span>
           </a>
         </li>
+        <?php if($this->session->userdata('akses')=='1'){ ?>
+        <li>
+          <a href="<?php echo base_url().'backend/promo_schedule'?>">
+            <i class="fa fa-calendar"></i> <span>Promo Schedule</span>
+            <span class="pull-right-container">
+              <small class="label pull-right"></small>
+            </span>
+          </a>
+        </li>
+        <?php } ?>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-bus"></i>

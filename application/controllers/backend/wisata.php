@@ -15,11 +15,14 @@ class Wisata extends CI_Controller{
     function index(){
 	    /*if($this->session->userdata('akses')=='1'){*/
 	    	$x['data']=$this->mwisata->tampil_wisata();
-	        $this->load->view('backend/v_wisata',$x);
+	    	$x['wisatapromo']=$this->mwisata->getAllPromoByDate();
+	        $this->load->view('backend/v_beranda',$x);
 	    /*}else{
 	        echo "Halaman tidak ditemukan";
 	    }*/
     }
+
+
 
     function simpan_wisata(){
     	$config['upload_path'] = './assets/gambars/'; //path folder

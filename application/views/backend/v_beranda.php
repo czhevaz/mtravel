@@ -122,6 +122,31 @@ h1{
     <!-- Main content -->
     <section class="content">
       <div class="row">
+          <div class="col-md-12">
+            <div class="box-body">
+              <div class="carousel slide multi-item-carousel" id="promo">
+                <div class="carousel-inner">
+                  <?php
+                      $i=0;
+                      foreach($wisatapromo->result_array() as $m):
+                        $i++ ;     
+                        $gambarWisata=$m['gambar'];
+                  ?>
+
+                  <div class="item <?php if($i==1){echo 'active';} ?>">
+                    <div class="col-xs-3"><a href="#1"><img src="<?php echo base_url().'assets/gambars/'.$gambarWisata;?>" class="img-responsive"></a> <?php echo $i; ?></div>
+
+                  </div>
+                  <?php endforeach;?>
+            
+              <!--  Example item end -->
+                </div>
+                <a class="left carousel-control" href="#promo" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+              <a class="right carousel-control" href="#promo" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>  
+             </div> 
+          </div> 
+      </div> 
+      <div class="row">
         <?php
           function get_day_name($timestamp) {
 

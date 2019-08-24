@@ -145,18 +145,18 @@
                 <!-- Testimonial -->
                 <div class="container section">
                     <div id="home-testimonial" class="full-width column">
-                        <?php foreach($test->result_array() as $j):
+                        <?php /*foreach($test->result_array() as $j):
                             $name=$j['nama'];
                             $tgl_post=$j['tgl_post'];
-                            $pesan=$j['pesan'];
+                            $pesan=$j['pesan'];*/
                         ?>
                         <blockquote class="full-width">
                             <p>
-                                <?php echo $pesan;?>
+                                <?php //echo $pesan;?>
                             </p>
-                            <cite><?php echo $name;?></cite>
+                            <cite><?php //echo $name;?></cite>
                         </blockquote>
-                        <?php  endforeach ?>                                                
+                        <?php  //endforeach ?>                                                
                     </div>
                 </div>
                 

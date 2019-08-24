@@ -34,5 +34,10 @@ class Mwisata extends CI_Model{
 		$hasil=$this->db->query("delete from wisata where idwisata='$id'");
 		return $hasil;
 	}
+
+	function getAllPromoByDate(){
+    	$query=$this->db->query("select * from wisata  w LEFT JOIN promo_schedule_detail ps ON ps.wisata_id=w.idwisata LEFT JOIN promo_schedule p on p.id=ps.promo_schedule_id where p.date_start <= now() AND p.date_end >=now()");
+    	return $query;
+    }
 	
 }

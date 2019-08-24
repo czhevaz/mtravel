@@ -4,7 +4,7 @@ class Welcome extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->model('mberita');
-		$this->load->model('mtestimoni');
+		//$this->load->model('mtestimoni');
 		$this->load->model('m_pengunjung');
     }
 	public function index(){
@@ -21,21 +21,21 @@ class Welcome extends CI_Controller {
 		$cek_ip=$this->m_pengunjung->cek_ip($user_ip);
 		$cek=$cek_ip->num_rows();
 		if($cek > 0){
-			$x['paket']=$this->mberita->paket_footer();
+		//	$x['paket']=$this->mberita->paket_footer();
 			$x['berita']=$this->mberita->berita_footer();
 			$x['photo']=$this->mberita->get_photo();
 
-			$x['test']=$this->mtestimoni->tampil_test();
+		//	$x['test']=$this->mtestimoni->tampil_test();
 			$x['wisata']=$this->mberita->get_wisata();
 			$x['news']=$this->mberita->berita();
 			$this->load->view('front/home',$x);
 		}else{
 			$this->m_pengunjung->simpan_user_agent($user_ip,$agent);
-			$x['paket']=$this->mberita->paket_footer();
+			//$x['paket']=$this->mberita->paket_footer();
 			$x['berita']=$this->mberita->berita_footer();
 			$x['photo']=$this->mberita->get_photo();
 
-			$x['test']=$this->mtestimoni->tampil_test();
+			//$x['test']=$this->mtestimoni->tampil_test();
 			$x['wisata']=$this->mberita->get_wisata();
 			$x['news']=$this->mberita->berita();
 			$this->load->view('front/home',$x);
