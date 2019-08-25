@@ -123,27 +123,31 @@ h1{
     <section class="content">
       <div class="row">
           <div class="col-md-12">
+            <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="box-title ">
+                <h4>Promo</h4>
+               </div> 
+            </div>  
             <div class="box-body">
               <div class="carousel slide multi-item-carousel" id="promo">
-                <div class="carousel-inner">
-                  <?php
+                  <div class="carousel-inner">
+                    <?php
                       $i=0;
                       foreach($wisatapromo->result_array() as $m):
                         $i++ ;     
-                        $gambarWisata=$m['gambar'];
+                        $gambarMakanan=$m['gambar'];
+                        $nama_wisata = $m['nama_wisata']
                   ?>
 
                   <div class="item <?php if($i==1){echo 'active';} ?>">
-                    <div class="col-xs-3"><a href="#1"><img src="<?php echo base_url().'assets/gambars/'.$gambarWisata;?>" class="img-responsive"></a> <?php echo $i; ?></div>
-
+                    <div class="col-xs-4"><a href="#1"><img src="<?php echo base_url().'assets/gambars/'.$gambarMakanan;?>" class="img-responsive"></a><b><?php echo $nama_wisata;?></b></div>
                   </div>
                   <?php endforeach;?>
-            
-              <!--  Example item end -->
-                </div>
-                <a class="left carousel-control" href="#promo" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-              <a class="right carousel-control" href="#promo" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>  
-             </div> 
+                  </div>  
+              </div>   
+            </div> 
+            </div>
           </div> 
       </div> 
       <div class="row">
