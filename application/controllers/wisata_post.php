@@ -8,7 +8,7 @@ class Wisata_post extends CI_Controller {
     }
 	public function index()
 	{
-        $x['paket']=$this->mberita->paket_footer();
+        //$x['paket']=$this->mberita->paket_footer();
         $x['berita']=$this->mberita->berita_footer();
         $x['photo']=$this->mberita->get_photo();
 		$jum=$this->mwisata->count_wisata();
@@ -34,9 +34,9 @@ class Wisata_post extends CI_Controller {
 		$this->load->view('front/v_wisata',$x);
 	}
 	function detail_wisata(){
-        $x['paket']=$this->mberita->paket_footer();
+        /*$x['paket']=$this->mberita->paket_footer();
         $x['berita']=$this->mberita->berita_footer();
-        $x['photo']=$this->mberita->get_photo();
+        $x['photo']=$this->mberita->get_photo();*/
 		$kode=$this->uri->segment(3);
 		$x['brt']=$this->mwisata->tampil_wisata();
 		$x['news']=$this->mwisata->getwisata($kode);

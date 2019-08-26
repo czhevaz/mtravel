@@ -7,9 +7,9 @@
 								<li>
                                     <a href="<?php echo base_url().'about';?>"><span>&nbsp;&nbsp;&nbsp;- </span>Tentang Kami</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="<?php echo base_url().'testimoni';?>"><span>&nbsp;&nbsp;&nbsp;- </span>Testimoni</a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="<?php echo base_url().'lokasi';?>"><span>&nbsp;&nbsp;&nbsp;- </span>Lokasi</a>
                                 </li>
@@ -21,13 +21,13 @@
                         <!-- <li>
                             <a href="<?php echo base_url().'paket_tour'?>">Paket Tour</a>
                         </li> -->
-                         <li>
+                        <!--  <li>
                             <a href="<?php echo base_url().'konfirmasi'?>">Konfirmasi</a>
-                        </li>
+                        </li> -->
                             
-                        <li>
+                       <!--  <li>
                             <a href="<?php echo base_url().'berita_post'?>">Berita</a>
-                        </li>
+                        </li> -->
 						<li>
                             <a href="#">Gallery</a>
                             <ul>

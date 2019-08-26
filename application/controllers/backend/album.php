@@ -10,12 +10,12 @@ class Album extends CI_Controller{
         $this->load->library('upload');
     }
     function index(){
-        if($this->session->userdata('akses')=='1'){
+        /*if($this->session->userdata('akses')=='1'){*/
         	$x['data']=$this->malbum->tampil_album();
             $this->load->view('backend/v_album',$x);
-        }else{
+        /*}else{
             echo "Halaman tidak ditemukan";
-        }
+        }*/
     }
 
     function simpan_album(){

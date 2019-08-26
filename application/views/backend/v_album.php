@@ -70,13 +70,14 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12 col-sm-12 co-xs-12">
-        <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Add New</a>
-            </div>
-        </div>    
+          <div class="box">
+              <div class="box-header">
+                <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Add New</a>
+              </div>
+          </div>    
         </div>
-      </div
+        </div>
+       <div class="row"> 
        <div class=" gal-container">
 
       <?php
@@ -125,53 +126,9 @@
             
           <?php endforeach;?>
         
-      
-    </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-           
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Add New</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:13px;">
-                <thead>
-                <tr>
-          					<th>Cover</th>
-          					<th>Album</th>
-                    <th style="text-align:right;">Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-          				<?php
-                    $no=0;
-                        foreach($data->result_array() as $a):
-                            $no++;
-                            $id=$a['idalbum'];
-                            $judul=$a['jdl_album'];
-                            $cover=$a['cover'];
-                    ?>
-                <tr>
-                  <td><img class="img-thumbnail" width="90" height="80" src="<?php echo base_url().'assets/gambars/'.$cover; ?>"></td>
-                  <td style="vertical-align:middle;"><?php echo $judul; ?></td>
-                  <td style="text-align:right;">
-                        <a class="btn" data-toggle="modal" data-target="#ModalUpdate<?php echo $id;?>"><span class="fa fa-pencil"></span></a>
-                        <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><span class="fa fa-trash"></span></a>
-                  </td>
-                </tr>
-				      <?php endforeach;?>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
       </div>
+      </div>
+      
       <!-- /.row -->
     </section>
     <!-- /.content -->

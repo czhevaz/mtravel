@@ -22,6 +22,12 @@ class Mwisata extends CI_Model{
 		$hasil=$this->db->query("select * from wisata where idwisata='$kode'");
 		return $hasil;
 	}
+
+	function get_wisata_front(){
+		$hasil=$this->db->query("select * from wisata order by idwisata desc limit 6");
+		return $hasil;
+	}
+
 	function update_wisata_with_img($kode,$nama_wisata,$deskripsi,$gambar){
 		$hasil=$this->db->query("UPDATE wisata SET nama_wisata='$nama_wisata',deskripsi='$deskripsi',gambar='$gambar' WHERE idwisata='$kode'");
 		return $hasil;

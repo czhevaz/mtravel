@@ -7,7 +7,7 @@ class Berita_post extends CI_Controller {
     }
 	public function index()
 	{
-        $x['paket']=$this->mberita->paket_footer();
+/*        $x['paket']=$this->mberita->paket_footer();*/
         $x['berita']=$this->mberita->berita_footer();
         $x['photo']=$this->mberita->get_photo();
 		$jum=$this->mberita->count_berita();
@@ -33,7 +33,7 @@ class Berita_post extends CI_Controller {
 		$this->load->view('front/v_berita',$x);
 	}
 	function detail_berita(){
-        $x['paket']=$this->mberita->paket_footer();
+        //$x['paket']=$this->mberita->paket_footer();
         $x['berita']=$this->mberita->berita_footer();
         $x['photo']=$this->mberita->get_photo();
 		$kode=$this->uri->segment(3);

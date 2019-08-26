@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
 		//$this->load->model('mtestimoni');
 		$this->load->model('m_pengunjung');
 		$this->load->model('mwisata');
+		$this->load->model('mmakanan');
     }
 	public function index(){
 		$user_ip=$_SERVER['REMOTE_ADDR'];
@@ -39,6 +40,7 @@ class Welcome extends CI_Controller {
 			//$x['test']=$this->mtestimoni->tampil_test();
 			$x['wisata']=$this->mberita->get_wisata();
 			$x['news']=$this->mberita->berita();
+
 			$this->load->view('front/home',$x);
 		}
 	}

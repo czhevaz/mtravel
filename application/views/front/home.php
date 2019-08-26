@@ -77,9 +77,9 @@
                 <!-- Content -->
                 <div id="content">
                     <div id="intro">
-                        <h1><span>Welcome to AW-Travel</span></h1>
+                        <h1><span>Welcome to M-Travel</span></h1>
                         <p style="text-align: center;">
-                            AW-Travel Adalah Source Code Open Source berbasis web untuk company profil Tour and Travel yang menyajikan Berbagai Informasi dan Paket Wisata Pilihan. Dimana para wistawan dapan membooking paket wisata yang diinginkan secara online.
+                            M-Travel Adalah Source Code Open Source berbasis web untuk company profil Tour and Travel yang menyajikan Berbagai Informasi dan Paket Wisata Pilihan. Dimana para wistawan dapan membooking paket wisata yang diinginkan secara online.
                         </p>
                         <p>
                             <a href="<?php echo base_url().'administrator';?>" class="large gray button">Sign in</a><span>Atau</span><a href="<?php echo base_url().'register'?>" class="large gray button">Register</a>
@@ -119,17 +119,18 @@
                        
                     <div id="sub" class="container section">
                          <?php
-                            foreach ($news->result_array() as $b) {
-                                $idberita=$b['idberita'];
-                                $judul=$b['judul'];
-                                $isi=$b['isi'];
-                                $tglpost=$b['tglpost'];
-                                $gbr=$b['gambar'];
-                                $user=$b['user'];
+                            $news=$this->mmakanan->get_makanan_front()->result_array();
+                            foreach ($news as $b) {
+                                $idberita=$b['id'];
+                                $judul=$b['nama'];
+                                $isi=$b['deskripsi'];
+                                $tglpost=$b['date_created'];
+                                $gbr=$b['photo'];
+                                $user=$b['created_by'];
                             ?>
                         <div class="one-fourth column last" style="margin-left:2px;padding-right:10px;">
                             <div class="one-fourth column hover">
-                                <a href="<?php echo base_url().'berita_post/detail_berita/'.$idberita;?>">
+                                <a href="<?php echo base_url().'makanan/detail_makanan/'.$idberita;?>">
                                 <div class="readmore">
                                     <span class="text"><span class="anchor"></span></span>
                                 </div>

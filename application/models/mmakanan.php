@@ -11,4 +11,28 @@ class Mmakanan extends CI_Model{
 		return $hsl;
 	}
 
+	function get_makanan_front(){
+		$hsl=$this->db->query("SELECT * FROM makanan   ORDER BY date_created desc limit 4");
+		return $hsl;
+	}
+
+	function tampil_makanan(){
+		$hasil=$this->db->query("select * from makanan order by date_created DESC");
+		return $hasil;
+	}
+
+	function getMakanan($kode){
+		$hasil=$this->db->query("select * from makanan where id='$kode'");
+		return $hasil;
+	}
+	function get_makanan($offset,$limit){
+		$hasil=$this->db->query("select * from makanan order by date_created DESC limit $offset,$limit");
+		return $hasil;
+	}
+
+	function count_makanan(){
+		$hasil=$this->db->query("select * from makanan");
+		return $hasil;
+	}
+
 }

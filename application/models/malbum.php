@@ -16,6 +16,8 @@ class Malbum extends CI_Model{
 		$hasil=$this->db->query("select * from album");
 		return $hasil;
 	}
+
+	
 	function SimpanAlbum($jdl,$gambar){
 		$hasil=$this->db->query("insert into album (jdl_album,cover,jml) values ('$jdl','$gambar','0')");
 		return $hasil;

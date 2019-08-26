@@ -10,13 +10,13 @@ class Galeri extends CI_Controller{
         $this->load->library('upload');
     }
     function index(){
-        if($this->session->userdata('akses')=='1'){
+ /*       if($this->session->userdata('akses')=='1'){*/
         	$x['data']=$this->mgaleri->tampil_galeri();
             $x['alm']=$this->mgaleri->get_album();
             $this->load->view('backend/v_galeri',$x);
-        }else{
+        /*}else{
             echo "Halaman tidak ditemukan";
-        }
+        }*/
     }
     
     function simpan_galeri(){
