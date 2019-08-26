@@ -6,6 +6,7 @@ class Welcome extends CI_Controller {
         $this->load->model('mberita');
 		//$this->load->model('mtestimoni');
 		$this->load->model('m_pengunjung');
+		$this->load->model('mwisata');
     }
 	public function index(){
 		$user_ip=$_SERVER['REMOTE_ADDR'];

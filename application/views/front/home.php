@@ -44,15 +44,22 @@
                     </div>
                     <div id="banner-slider" class="flexslider">
                         <ul class="slides">
+                            <?php 
+                               
+                                  $query=$this->db->query("SELECT count(l.id) as likes ,w.idwisata as wisata_id  FROM mlike l Left join wisata w on w.idwisata =l.wisata_id GROUP BY wisata_id ORDER BY count(l.id) DESC limit 3");
+                                  foreach ($query->result_array() as $i) :
+                                      $wisatas = $this->mwisata->getwisata($i['wisata_id'])->row();
+                                      $tulisan_judul=$wisatas->nama_wisata;
+                                      $tulisan_views=$i['likes'];
+                                      $gambar = $wisatas->gambar;
+                              
+                            ?>
                             <li>
-                                <img src="<?php echo base_url().'theme/images/placeholders/940x450.png'?>" alt="" />
+                            
+                                <img src="<?php echo base_url().'assets/gambars/'.$gambar;?>" class="img-responsive">
                             </li>
-                            <li>
-                                <img src="<?php echo base_url().'theme/images/placeholders/slide2.png'?>" alt="" />
-                            </li>
-                            <li>
-                                <img src="<?php echo base_url().'theme/images/placeholders/slide3.png'?>" alt="" />
-                            </li>
+                            <?php endforeach;?>
+                            
                         </ul>
                     </div>
 
@@ -70,9 +77,9 @@
                 <!-- Content -->
                 <div id="content">
                     <div id="intro">
-                        <h1><span>Welcome to M-Travel</span></h1>
+                        <h1><span>Welcome to AW-Travel</span></h1>
                         <p style="text-align: center;">
-                            M-Travel Adalah Source Code Open Source berbasis web untuk company profil Tour and Travel yang menyajikan Berbagai Informasi dan Paket Wisata Pilihan. Dimana para wistawan dapan membooking paket wisata yang diinginkan secara online.
+                            AW-Travel Adalah Source Code Open Source berbasis web untuk company profil Tour and Travel yang menyajikan Berbagai Informasi dan Paket Wisata Pilihan. Dimana para wistawan dapan membooking paket wisata yang diinginkan secara online.
                         </p>
                         <p>
                             <a href="<?php echo base_url().'administrator';?>" class="large gray button">Sign in</a><span>Atau</span><a href="<?php echo base_url().'register'?>" class="large gray button">Register</a>
@@ -154,7 +161,7 @@
                             <p>
                                 <?php //echo $pesan;?>
                             </p>
-                            <cite><?php //echo $name;?></cite>
+                            <cite><?php echo $name;?></cite>
                         </blockquote>
                         <?php  //endforeach ?>                                                
                     </div>
@@ -196,21 +203,7 @@
                                 <?php } ?>
                             </ul>
                         </div>
-                        <div id="footer-offers" class="one-fourth column">
-                            <h4><span class="footer left">Paket Tour</span></h4>
-                            <ul>
-                            <?php
-                            foreach ($paket->result_array() as $h) {
-                                $idpaketf=$h['idpaket'];
-                                $namapaketf=$h['nama_paket'];
-                                $gambarf=$h['gambar'];
-                            ?>
-                                <li>
-                                    <a href="<?php echo base_url().'paket_tour/detail_paket/'.$idpaketf;?>"><img width="50" height="50" src="<?php echo base_url().'assets/gambars/'.$gambarf;?>" alt="" /><?php echo $namapaketf;?></a>
-                                </li>
-                            <?php } ?> 
-                            </ul>
-                        </div>
+                        
                         <div id="footer-gallery" class="one-fourth column last">
                             <h4><span class="footer left">Photo Gallery</span></h4>
                             <ul>

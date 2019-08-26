@@ -186,15 +186,15 @@
 
               <table class="table">
               <?php 
-                  $query=$this->db->query("SELECT * FROM berita ORDER BY idberita DESC");
+                  $query=$this->db->query("SELECT count(l.id) as likes ,w.nama_wisata as nama  FROM mlike l Left join wisata w on w.idwisata =l.wisata_id GROUP BY wisata_id ORDER BY count(l.id) DESC");
                   foreach ($query->result_array() as $i) :
-                      $tulisan_id=$i['idberita'];
-                      $tulisan_judul=$i['judul'];
-                      $tulisan_views=$i['views'];
+                      
+                      $tulisan_judul=$i['nama'];
+                      $tulisan_views=$i['likes'];
               ?>
                   <tr>
                     <td><?php echo $tulisan_judul;?></td>
-                    <td><?php echo $tulisan_views.' Views';?></td>
+                    <td><span class="badge bg-blue"><?php echo $tulisan_views.' Likes';?></span></td>
                   </tr>
               <?php endforeach;?>
               </table>
